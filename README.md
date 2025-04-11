@@ -2,9 +2,11 @@
 
 ![License](https://img.shields.io/github/license/hizpark/validation-contract)
 ![PHP](https://img.shields.io/badge/PHP-8.0%20to%208.4%20-blue)
-![Tests](https://img.shields.io/badge/tests-PHPUnit-brown)
-![Static Analysis](https://img.shields.io/badge/static_analysis-PHPStan-cyan)
-![Code Style](https://img.shields.io/badge/code_style-PSR--12-pink)
+![Tests](https://img.shields.io/badge/tests-PHPUnit-brightgreen)
+![Codecov](https://img.shields.io/codecov/c/github/hizpark/validation-contract)
+![Static Analysis](https://img.shields.io/badge/static_analysis-PHPStan-blue)
+![Code Style](https://img.shields.io/badge/code_style-PSR--12-lightgrey)
+![CI](https://github.com/hizpark/validation-contract/actions/workflows/ci.yml/badge.svg)
 
 > A lightweight and framework-agnostic validation contract package for PHP.
 
