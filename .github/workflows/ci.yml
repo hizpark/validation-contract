@@ -1,0 +1,55 @@
+name: PHP CI
+
+on:
+    push:
+        branches:
+            - main  # 你可以根据实际情况选择你的默认分支名，比如 master 或 main
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    phpunit:
+        runs-on: ubuntu-latest  # 使用 GitHub 提供的最新的 Ubuntu 环境
+
+        steps:
+            # Checkout the repository
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            # Set up PHP
+            - name: Set up PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.4'  # 选择你项目的 PHP 版本
+
+            # Install dependencies with Composer
+            - name: Install dependencies
+              run: |
+                  composer install --no-interaction
+
+            # Run PHP CS Fixer
+            - name: Run PHP CS Fixer
+              run: |
+                  composer run cs:chk
+
+            # Run PHPStan analysis
+            - name: Run PHPStan
+              run: |
+                  composer run stan
+
+            # Run PHPUnit tests
+            - name: Run PHPUnit tests
+              run: |
+                  composer run test
+
+            # Run PHPUnit tests with coverage
+            - name: Run PHPUnit tests with coverage
+              run: |
+                  composer run test:coverage
+
+            # Optional: Upload code coverage report to GitHub (requires a GitHub token)
+            - name: Upload coverage report to GitHub
+              uses: codecov/codecov-action@v3
+              with:
+                  file: ./coverage-report/index.html

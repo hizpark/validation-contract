@@ -1,0 +1,37 @@
+{
+    "name": "hizpark/validation-contract",
+    "description": "A lightweight and framework-agnostic validation contract package for PHP, providing a common interface for validation results and validators.",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Harper Jang",
+            "email": "harper.jang@outlook.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Hizpark\\ValidationContract\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Hizpark\\ValidationContract\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=8.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^12.1"
+    },
+    "scripts": {
+        "cs:fix": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --config=.php-cs-fixer.dist.php --allow-risky=yes --format=txt --diff --verbose --ansi",
+        "cs:chk": "composer run cs:fix -- --dry-run",
+        "stan": "phpstan analyse src tests",
+        "test": "phpunit",
+        "test:coverage": "XDEBUG_MODE=coverage phpunit --coverage-html coverage-report --coverage-filter src/"
+    }
+}
