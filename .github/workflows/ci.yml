@@ -39,7 +39,7 @@ jobs:
 
             - name: Generate code coverage report
               run: |
-                  vendor/bin/phpunit --coverage-clover=coverage.xml
+                  XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-clover=coverage.xml --coverage-filter src/
 
             - name: Upload coverage to Codecov
               uses: codecov/codecov-action@v3
