@@ -1,12 +1,4 @@
 parameters:
     level: max
     phpVersion: 80000
-    paths:
-        - src
-        - tests
-    excludePaths:
-        - tests/bootstrap.php (?)
     reportUnmatchedIgnoredErrors: false
-
-includes:
-    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
