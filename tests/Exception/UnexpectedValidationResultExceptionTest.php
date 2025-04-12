@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Hizpark\ValidationContract\Tests\Contracts;
+namespace Hizpark\ValidationContract\Tests\Exception;
 
 use Hizpark\ValidationContract\Exception\UnexpectedValidationResultException;
 use PHPUnit\Framework\TestCase;
