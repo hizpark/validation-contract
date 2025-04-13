@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="vendor/autoload.php"
+         cacheDirectory=".phpunit_cache"
          colors="true"
-         backupGlobals="false"
-         processIsolation="false"
          failOnRisky="true"
          failOnWarning="true"
-         stopOnFailure="false"
+         failOnDeprecation="true"
 >
     <testsuites>
         <testsuite name="ValidationContract Tests">
@@ -13,11 +12,11 @@
         </testsuite>
     </testsuites>
 
-    <coverage>
+    <source>
         <include>
             <directory suffix=".php">src</directory>
         </include>
-    </coverage>
+    </source>
 
     <php>
         <ini name="error_reporting" value="E_ALL"/>

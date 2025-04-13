@@ -7,4 +7,5 @@ phpstan.neon
 phpunit.xml
 
 vendor/
-coverage-report/
+.phpunit_cache/
+.phpunit_coverage/

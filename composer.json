@@ -33,6 +33,6 @@
         "cs:chk": "composer run cs:fix -- --dry-run",
         "stan": "phpstan analyse",
         "test": "phpunit --stop-on-failure",
-        "test:coverage": "XDEBUG_MODE=coverage phpunit --coverage-html coverage-report"
+        "test:coverage": "XDEBUG_MODE=coverage phpunit --coverage-html .phpunit_coverage"
     }
 }
