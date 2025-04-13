@@ -1,16 +1,16 @@
-# hizpark/validation-contract
+# validation-contract
 
 ![License](https://img.shields.io/github/license/hizpark/validation-contract)
 ![PHP](https://img.shields.io/badge/PHP-8.0%20to%208.4%20-blue)
+![Code Style](https://img.shields.io/badge/code_style-PSR--12-lightgrey)
+![Static Analysis](https://img.shields.io/badge/static_analysis-PHPStan-blue)
 ![Tests](https://img.shields.io/badge/tests-PHPUnit-brightgreen)
 ![Codecov](https://img.shields.io/codecov/c/github/hizpark/validation-contract)
-![Static Analysis](https://img.shields.io/badge/static_analysis-PHPStan-blue)
-![Code Style](https://img.shields.io/badge/code_style-PSR--12-lightgrey)
 ![CI](https://github.com/hizpark/validation-contract/actions/workflows/ci.yml/badge.svg)
 
-> A lightweight and framework-agnostic validation contract package for PHP.
+> Lightweight, framework-agnostic validation contract for PHP.
 
-`hizpark/validation-contract` 提供了通用验证器接口与验证结果接口，旨在帮助开发者构建统一、可测试、易扩展的验证逻辑，支持用于上传验证、表单验证、自定义数据规则等任意场景。
+一个轻量级、与框架无关的验证契约包，提供通用的验证器接口与验证结果接口，旨在帮助开发者构建统一、可测试、易扩展的验证逻辑，适用于上传验证、表单验证、自定义规则等各类验证场景。
 
 ## ✨ 特性
 
@@ -19,15 +19,13 @@
 - 同时支持异常式与结果式验证流程
 - 可作为独立组件使用或集成进大型架构中
 
-## 💿 安装
-
-使用 Composer 安装：
+## 📦 安装
 
 ```bash
 composer require hizpark/validation-contract
 ```
 
-## 📦 目录结构
+## 📂 目录结构
 
 ```txt
 src
@@ -42,7 +40,7 @@ src
 
 ## 🚀 用法示例
 
-### 定义一个验证器：
+### 示例 1：自定义 Email 验证器
 
 ```php
 use Hizpark\ValidationContract\Contracts\ValidatorContract;
@@ -62,7 +60,7 @@ class EmailValidator implements ValidatorContract
 }
 ```
 
-### 使用验证器：
+### 示例 2：执行验证并处理结果
 
 ```php
 $validator = new EmailValidator();
@@ -70,7 +68,7 @@ $validator = new EmailValidator();
 $result = $validator->validate('hello@example.com');
 
 if (!$result->isValid()) {
-    echo $result->getError(); // 输出错误信息
+    echo $result->getError();
 }
 ```
 
@@ -78,18 +76,24 @@ if (!$result->isValid()) {
 
 ### `ValidatorContract`
 
+> 用于定义验证逻辑
+
 ```php
+namespace Hizpark\ValidationContract\Contracts;
+
 interface ValidatorContract
 {
     public function validate(mixed $target): ValidationResultContract;
 }
 ```
 
-- 用于定义验证逻辑。
-
 ### `ValidationResultContract`
 
+> 表示验证结果状态
+
 ```php
+namespace Hizpark\ValidationContract\Contracts;
+
 interface ValidationResultContract
 {
     public function isValid(): bool;
@@ -98,11 +102,13 @@ interface ValidationResultContract
 }
 ```
 
-- 表示验证结果状态。
+### `ValidationResult`
 
-### `ValidationResult` 工具类
+> `ValidationResultContract` 接口实现及扩展
 
 ```php
+namespace Hizpark\ValidationContract\DTO;
+
 ValidationResult::ok();                   // 构造成功结果
 ValidationResult::fail('error message');  // 构造失败结果
 ```
@@ -112,21 +118,21 @@ ValidationResult::fail('error message');  // 构造失败结果
 使用 PHP-CS-Fixer 工具检查代码风格：
 
 ```bash
-./composer cs:chk
+composer cs:chk
 ```
 
 使用 PHP-CS-Fixer 工具自动修复代码风格问题：
 
 ```bash
-./composer cs:fix
+composer cs:fix
 ```
 
-## 🧠 静态分析
+## 🔍 静态分析
 
 使用 PHPStan 工具进行静态分析，确保代码的质量和一致性：
 
 ```bash
-./composer stan
+composer stan
 ```
 
 ## ✅ 单元测试
@@ -134,13 +140,13 @@ ValidationResult::fail('error message');  // 构造失败结果
 执行 PHPUnit 单元测试：
 
 ```bash
-./composer test
+composer test
 ```
 
 执行 PHPUnit 单元测试并生成代码覆盖率报告：
 
 ```bash
-./composer test:coverage
+composer test:coverage
 ```
 
 ## 🤝 贡献指南

@@ -14,32 +14,29 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
+          extensions: mbstring, dom
+          coverage: xdebug
 
       - name: Install dependencies
-        run: |
-          composer install --no-interaction --prefer-dist
+        run: composer install --no-interaction --prefer-dist
 
       - name: Run PHP CS Fixer
-        run: |
-          composer run cs:chk
+        run: composer run cs:chk
 
       - name: Run PHPStan
-        run: |
-          composer run stan
+        run: composer run stan
 
       - name: Run PHPUnit tests
-        run: |
-          composer run test
+        run: composer run test
 
       - name: Generate code coverage report
-        run: |
-          XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-clover=coverage.xml --coverage-filter src/
+        run: XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-clover=coverage.xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
