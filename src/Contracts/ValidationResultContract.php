@@ -7,6 +7,8 @@ namespace Hizpark\ValidationContract\Contracts;
 interface ValidationResultContract
 {
     public function isValid(): bool;
+
     public function getError(): ?string;
+
     public function getCode(): ?string;
 }

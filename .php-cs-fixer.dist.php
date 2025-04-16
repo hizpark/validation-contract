@@ -8,37 +8,98 @@ $finder = PhpCsFixer\Finder::create()
     ->name('*.php');
 
 return (new PhpCsFixer\Config())
+    ->setRiskyAllowed(true)
     ->setRules([
-        // ✅ 遵循 PSR-12 标准
+        // ==================== 基礎規範 ====================
         '@PSR12' => true,
-
-        // ✅ 强制开启严格类型声明（文件顶部必须有 declare(strict_types=1);）
+        '@PHP84Migration' => true,
         'declare_strict_types' => true,
+        'strict_param' => true,
 
-        // ✅ 使用短数组语法 []
+        // ==================== 類型系統 ====================
+        'void_return' => true,
+        'nullable_type_declaration_for_default_null_value' => true,
+        'phpdoc_to_param_type' => true,
+        'phpdoc_to_property_type' => true,
+        'phpdoc_to_return_type' => true,
+        'no_superfluous_phpdoc_tags' => ['allow_mixed' => false],
+
+        // ==================== 現代語法 ====================
         'array_syntax' => ['syntax' => 'short'],
+        'list_syntax' => ['syntax' => 'short'],
+        'modernize_types_casting' => true,
+        'get_class_to_class_keyword' => true,
+        'ternary_to_null_coalescing' => true,
 
-        // ✅ 二元运算符对齐，增强可读性
-        'binary_operator_spaces' => ['default' => 'align_single_space_minimal'],
-
-        // ✅ return 前强制添加空行
-        'blank_line_before_statement' => ['statements' => ['return']],
-
-        // ✅ import 顺序按字母排序
-        'ordered_imports' => ['sort_algorithm' => 'alpha'],
-
-        // ✅ 删除未使用的 use 引入
-        'no_unused_imports' => true,
-
-        // ✅ 使用单引号（除非字符串中包含变量或需要转义）
+        // ==================== 代碼風格 ====================
         'single_quote' => true,
+        'phpdoc_align' => [
+            'align' => 'vertical',       // 垂直对齐冒号
+            'tags' => ['param', 'return', 'throws', 'var', 'type'],
+        ],
+        'phpdoc_indent' => true,        // 注释缩进与代码一致
+        'phpdoc_separation' => true,    // 分组间空行
+        'phpdoc_order' => [             // 更精细的顺序控制（可选）
+            'order' => [
+                'param', 'throws', 'return', 'var', 'type'
+            ],
+        ],
+        'phpdoc_trim' => true,          // 清理多余空格
+        'phpdoc_scalar' => true,        // 标准化基本类型
+        'phpdoc_single_line_var_spacing' => true,  // 单行 `@var` 空格控制
+        'blank_line_before_statement' => [
+            'statements' => ['return', 'throw', 'try', 'if', 'foreach', 'while', 'do']
+        ],
+        'no_unused_imports' => true,
+        'fully_qualified_strict_types' => true,
+        'global_namespace_import' => [
+            'import_classes' => true,
+            'import_functions' => true,
+            'import_constants' => true,
+        ],
+        'ordered_interfaces' => true,
+        'ordered_imports' => [
+            'sort_algorithm' => 'alpha',
+            'imports_order' => ['class', 'function', 'const'],
+        ],
 
-        // ✅ 使用严格比较 === 和 !== 替代 == 和 !=
-        'strict_comparison' => true,
-
-        // ✅ 多行结构统一添加结尾逗号，减少 git diff 干扰
+        // ==================== 多行結構 ====================
+        'array_indentation' => true,
+        'binary_operator_spaces' => [
+            'default' => 'align_single_space_minimal',
+            'operators' => ['=>' => 'align_single_space']
+        ],
         'trailing_comma_in_multiline' => [
             'elements' => ['arrays', 'arguments', 'parameters', 'match'],
+            'after_heredoc' => true
         ],
+        'method_argument_space' => [
+            'on_multiline' => 'ensure_fully_multiline',
+            'keep_multiple_spaces_after_comma' => false
+        ],
+
+        // ==================== 安全規則 ====================
+        'no_alias_functions' => true,
+        'no_mixed_echo_print' => ['use' => 'echo'],
+        'no_php4_constructor' => true,
+        'no_unneeded_final_method' => true,
+
+        // ==================== 屬性控制 ====================
+        'attribute_empty_parentheses' => true,
+        'single_space_after_construct' => [
+            'constructs' => ['attribute']
+        ],
+        'class_attributes_separation' => [
+            'elements' => [
+                'method' => 'one',
+                'property' => 'one',
+                'trait_import' => 'none'
+            ]
+        ],
+        'braces' => [
+            'allow_single_line_closure' => true,
+            'allow_single_line_anonymous_class_with_empty_body' => true,
+            'position_after_functions_and_oop_constructs' => 'next'
+        ]
     ])
     ->setFinder($finder);

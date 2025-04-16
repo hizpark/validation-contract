@@ -9,8 +9,6 @@ use Hizpark\ValidationContract\Exception\UnexpectedValidationResultException;
 interface ValidatorContract
 {
     /**
-     * @param mixed $target
-     * @return ValidationResultContract
      * @throws UnexpectedValidationResultException 当结果非 ValidationResultContract 实例
      */
     public function validate(mixed $target): ValidationResultContract;
